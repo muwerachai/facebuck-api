@@ -5,7 +5,14 @@ const upload = require('../middlewares/upload');
 const router = express.Router();
 
 router.get('/me' , userController.getMe);
-router.patch('/' , upload.single('profilePic'), userController.updateProfile);
+router.patch(
+    '/' , 
+    upload.fields([
+    {name: 'profilePic', maxcount:1}, 
+    {name: 'coverPhoto', maxcount: 1}
+    ]), 
+    userController.updateProfile
+    );
 
 
 module.exports = router;
