@@ -21,7 +21,7 @@ const { Comment } = require('../models');
    try {
      const { title } = req.body;
      const { id, postId } = req.params;
-     const comment = await Comment.findOne({ id, postId });
+     const comment = await Comment.findOne({ where: { id, postId } });
      if (!comment) {
        createError('comment not found', 400);
      }
@@ -41,7 +41,7 @@ const { Comment } = require('../models');
  exports.deleteComment = async (req, res, next) => {
    try {
      const { id, postId } = req.params;
-     const comment = await Comment.findOne({ id, postId });
+     const comment = await Comment.findOne({ where: { id, postId } });
      if (!comment) {
        createError('comment not found', 400);
      }

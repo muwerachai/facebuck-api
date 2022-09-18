@@ -23,6 +23,7 @@ exports.updateProfile = async (req,res,next) => {
           if (req.user.profilePic) {
             const splited = req.user.profilePic.split('/');
             const publicId = splited[splited.length - 1].split('.')[0];
+            // console.log(publicId);
             await cloudinary.destroy(publicId);
           }
           updateValue.profilePic = result.secure_url;
