@@ -5,16 +5,16 @@ const upload = require('../middlewares/upload');
 
 const router = express.Router();
 
-router.get('/me' , userController.getMe);
+router.get('/me', userController.getMe);
 router.patch(
-    '/' , 
-    upload.fields([
-    {name: 'profilePic', maxcount:1}, 
-    {name: 'coverPhoto', maxcount: 1}
-    ]), 
-    userController.updateProfile
-    );
-    router.get('/posts', postController.getUserPost);
-
+  '/',
+  upload.fields([
+    { name: 'profilePic', maxCount: 1 },
+    { name: 'coverPhoto', maxCount: 1 }
+  ]),
+  userController.updateProfile
+);
+router.get('/posts', postController.getUserPost);
+router.get('/:userId', userController.getUserById);
 
 module.exports = router;
