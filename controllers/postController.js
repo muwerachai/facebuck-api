@@ -177,8 +177,9 @@ const fs = require('fs');
       // SELECT * FROM posts WHERE userId IN (myId, friendId1, friendId2, friendId3, ...)
       const posts = await Post.findAll({
         where: { userId: userId }, // WHERE userId IN (1,2,3) => WHERE userId = 1 OR userId = 2 OR userId = 3
+        order: [['updatedAt', 'DESC']],
         attributes: {
-          exclude: ['createdAt', 'userId']
+          exclude: [ 'userId']
         },
         include: [
           {
@@ -194,9 +195,9 @@ const fs = require('fs');
             }
           },
           {
-            model: Comment,
+            model: Like,
             attributes: {
-              exclude: ['createdAt', 'userId']
+              exclude: ['createdAt']
             },
             include: {
               model: User,
